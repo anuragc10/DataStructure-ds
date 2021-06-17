@@ -1,0 +1,44 @@
+Q. You have been given a sorted array ARR of size M (M is very large). Elements stored in this
+array are 0 and 1, e.g. ARR = {0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0}. It is desired to compute the count of 0s in
+the array ARR. Propose an efficient algorithm to accomplish the task and implement the proposed
+algorithm.
+
+SOLUTION:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int countOnes(bool arr[], int low, int high)
+{
+  if (high >= low)
+  {
+    int mid = low + (high - low)/2;
+    if ( (mid == high || arr[mid+1] == 0) && (arr[mid] == 1))
+      return mid+1;
+
+    if (arr[mid] == 1)
+      return countOnes(arr, (mid + 1), high);
+
+    return countOnes(arr, low, (mid -1));
+  }
+  return 0;
+}
+ 
+
+int main()
+{
+   bool arr[20];
+    int arrnew[20];
+    int n;
+    cout<<"Enter the size of elements"<<endl;
+    cin>>n;
+    cout<<"Enter the elements"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        int a;
+        cin>>a;
+        arr[i]=a;
+    }
+   cout << "Count of 0's in given array is " <<n - countOnes(arr, 0, n-1);
+   return 0;
+}
