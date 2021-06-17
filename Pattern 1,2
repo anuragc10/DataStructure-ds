@@ -1,0 +1,91 @@
+Q You have been given an array, ARR of randomly arranged n numbers. It is desired to arrange the
+elements in the array in some specific order(s) so that when plotted it presents some specific pattern.
+Two of such desired patterns are presented in following example:
+ARR = { 2, 17, 15, 6, 21, 4, 12, 14, 5, 9, 19, 8}
+
+
+
+Write a program to arrange the elements of the array ARR twice so that in first arrangement it plots
+the Pattern 1 and in second arrangement it plots the Pattern 2.
+
+
+#include <bits/stdc++.h>
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    vector<int> v{ 2, 17, 15, 6, 21, 4, 12, 14, 5, 9, 19, 8};
+    int n=12;
+
+//pattern 1:
+
+    //1. sorting
+
+    cout<<"Original : ";
+    //print
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+    cout<<endl;
+    sort(v.begin(), v.end());
+
+    // copying in new vector
+    vector<int> vectnew(n, 0);
+    for(int i=0;i<n;i++)
+    {
+        vectnew[i]=v[i];
+    }
+
+    //2. swap adjacent elements
+    int b=0;
+
+    while(b<n)
+    {   int temp=v[b];
+        v[b]=v[b+1];
+        v[b+1]=temp;
+        b=b+2;
+    }
+    cout<<endl;
+    cout<<"Pattern 1: ";
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+
+
+
+
+
+
+
+//pattern 2:
+//increasing order for even in left to right side and
+//increasing order for odd in right to left side
+
+     int e=0;
+     int o=1;
+     vector<int> vect(n, 0);
+     for(int i=0;i<n/2;i++)
+     {
+         vect[e]=vectnew[i];
+         e=e+2;
+     }
+     for(int i=n-1;i>=n/2;i--)
+     {
+        vect[o]=vectnew[i];
+         o=o+2;
+     }
+
+    cout<<"\n";
+    //print
+    cout<<"Pattern 2: ";
+    for(int i=0;i<n;i++)
+    {
+        cout<<vect[i]<<" ";
+    }
+
+
+}
